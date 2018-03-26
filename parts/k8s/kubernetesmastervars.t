@@ -126,6 +126,7 @@
     "vnetCniLinuxPluginsURL":"[parameters('vnetCniLinuxPluginsURL')]",
     "vnetCniWindowsPluginsURL":"[parameters('vnetCniWindowsPluginsURL')]",
     "kubernetesNonMasqueradeCidr": "[parameters('kubernetesNonMasqueradeCidr')]",
+    "kubernetesKubeletClusterDomain": "[parameters('kubernetesKubeletClusterDomain')]",
     "maxPods": "[parameters('maxPods')]",
     "vnetCidr": "[parameters('vnetCidr')]",
     "gcHighThreshold":"[parameters('gcHighThreshold')]",
@@ -217,7 +218,6 @@
     "orchestratorNameVersionTag": "{{.OrchestratorProfile.OrchestratorType}}:{{.OrchestratorProfile.OrchestratorVersion}}",
 {{if IsAzureCNI}}
     "allocateNodeCidrs": false,
-    "ipAddressCount": {{.MasterProfile.IPAddressCount}},
 {{else}}
     "allocateNodeCidrs": true,
 {{end}}
@@ -304,9 +304,6 @@
       "[concat(variables('masterFirstAddrPrefix'), add(3, int(variables('masterFirstAddrOctet4'))))]",
       "[concat(variables('masterFirstAddrPrefix'), add(4, int(variables('masterFirstAddrOctet4'))))]"
     ],
-{{if IsAzureCNI}}
-    "masterSecondaryAddrs": [{{GetMasterSecondaryIP}}],
-{{end}}
     "masterEtcdServerPort": {{GetMasterEtcdServerPort}},
     "masterEtcdClientPort": {{GetMasterEtcdClientPort}},
     "masterEtcdPeerURLs":[
