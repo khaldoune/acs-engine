@@ -65,11 +65,9 @@
         "name": "loop"
       },
       {{if not IsHostedMaster}}
-        {{if not IsPrivateCluster}}
-          "dependsOn": [
-            "[concat('Microsoft.Network/publicIPAddresses/', variables('masterPublicIPAddressName'))]"
-          ],
-        {{end}}
+      "dependsOn": [
+        "[concat('Microsoft.Network/publicIPAddresses/', variables('masterPublicIPAddressName'))]"
+      ],
       {{end}}
       "location": "[variables('location')]",
       "name": "[concat(variables('storageAccountPrefixes')[mod(add(copyIndex(),variables('{{.Name}}StorageAccountOffset')),variables('storageAccountPrefixesCount'))],variables('storageAccountPrefixes')[div(add(copyIndex(),variables('{{.Name}}StorageAccountOffset')),variables('storageAccountPrefixesCount'))],variables('{{.Name}}AccountName'))]",
@@ -86,11 +84,9 @@
         "name": "datadiskLoop"
       },
       {{if not IsHostedMaster}}
-        {{if not IsPrivateCluster}}
-          "dependsOn": [
-            "[concat('Microsoft.Network/publicIPAddresses/', variables('masterPublicIPAddressName'))]"
-          ],
-        {{end}}
+      "dependsOn": [
+        "[concat('Microsoft.Network/publicIPAddresses/', variables('masterPublicIPAddressName'))]"
+      ],
       {{end}}
       "location": "[variables('location')]",
       "name": "[concat(variables('storageAccountPrefixes')[mod(add(copyIndex(variables('dataStorageAccountPrefixSeed')),variables('{{.Name}}StorageAccountOffset')),variables('storageAccountPrefixesCount'))],variables('storageAccountPrefixes')[div(add(copyIndex(variables('dataStorageAccountPrefixSeed')),variables('{{.Name}}StorageAccountOffset')),variables('storageAccountPrefixesCount'))],variables('{{.Name}}DataAccountName'))]",
